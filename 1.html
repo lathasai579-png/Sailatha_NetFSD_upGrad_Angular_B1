@@ -4,45 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            font-family: Arial,sans-serif;
+            background-color: lightblue;
+            font-size: 18px;
+        }
+         nav {
+            background-color: navy;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        .content {
+            padding: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            
+            body {
+                background-color: lightcoral;   /* Change background */
+                font-size: 14px;                /* Smaller font */
+            }
+
+            nav {
+                flex-direction: column;         /* Vertical layout */
+                align-items: center;
+            }
+
+            nav a {
+                margin: 10px 0;
+            }
+        }
+    </style>
 </head>
 <body>
-     <h1>Welcome to My Web Page</h1>
-     <p>
-        Hello! My name is SaiLatha. I am fresher who is interested in web development 
-        and programming. I enjoy learning new technologies and building creative projects.
-    </p>
-      <h2>My Hobbies</h2>
-    <ul>
-        <li>Reading Books</li>
-        <li>Coding</li>
-        <li>Listening to Music</li>
-        <li>Watching Educational Videos</li>
-    </ul>
-    <h2>My Daily Routine</h2>
-    <ol>
-        <li>Wake up early</li>
-        <li>Exercise</li>
-        <li>Attend classes</li>
-        <li>Study and practice coding</li>
-        <li>Sleep on time</li>
-    </ol>
-     <h2>Student Details</h2>
-    <table border="1">
-        <tr>
-            <th>Student Name </th>
-            <th>Subject</th>
-            <th>Marks</th>
-        </tr>
-        <tr>
-            <td rowspan="2">SaiLatha</td>
-            <td>Mathematics</td>
-            <td>95</td>
-        </tr>
-        <tr>
-           
-            <td>Computer Science</td>
-            <td>98</td>
-        </tr>
-    </table>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </nav>
+    <div class="content">
+        <h1>Responsive WebPage</h1>
+        <p>This page Changes the layout and style based on screen size</p>
+    </div>
 </body>
 </html>
