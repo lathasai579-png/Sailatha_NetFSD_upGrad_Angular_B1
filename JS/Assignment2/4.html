@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Dynamic Student Profile Manager</title>
+    
+    <style>
+        #profileBox{
+            width:300px;
+            padding:20px;
+            border:2px solid black;
+            background-color:#f2f2f2;
+            margin-top:20px;
+            font-size:18px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Student Profile</h2>
+
+<button onclick="updateStudentProfile(student)">Show Profile</button>
+<br><br>
+
+<input type="number" id="marksInput" placeholder="Enter New Marks">
+<button onclick="updateMarks(document.getElementById('marksInput').value)">
+Update Marks
+</button>
+
+<div id="profileBox"></div>
+
+<script>
+
+let student = {
+    name : "Sailatha",
+    rollNo : 101,
+    marks : 85
+};
+
+function updateStudentProfile(studentObj){
+    document.getElementById("profileBox").innerHTML =
+    "<p>Name : "+studentObj.name+"</p>"+
+    "<p>Roll No : "+studentObj.rollNo+"</p>"+
+    "<p>Marks : "+studentObj.marks+"</p>";
+}
+
+function updateMarks(newMarks){
+    student.marks = newMarks;
+    updateStudentProfile(student);
+}
+
+</script>
+
+</body>
+</html>
