@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">>
+  <title>Bank Account</title>
+</head>
+<body>
+
+<h2>Bank Account Operations</h2>
+
+<input type="number" id="amount" placeholder="Enter Amount">
+<br><br>
+
+<button onclick="depositMoney()">Deposit</button>
+<button onclick="withdrawMoney()">Withdraw</button>
+<button onclick="checkBal()">Check Balance</button>
+
+<p id="output"></p>
+
+<script>
+class BankAccount {
+  constructor(accountHolder, balance) {
+    this.accountHolder = accountHolder;
+    this.balance = balance;
+  }
+
+  deposit(amount) {
+    if (amount > 0) {
+      this.balance += amount;
+      return "₹" + amount + " Deposited Successfully";
+    } else {
+      return "Invalid Deposit Amount";
+    }
+  }
+
+  withdraw(amount) {
+    if (amount > this.balance) {
+      return "Cannot Withdraw More Than Balance";
+    } else if (amount <= 0) {
+      return "Invalid Withdrawal Amount";
+    } else {
+      this.balance -= amount;
+      return "₹" + amount + " Withdrawn Successfully";
+    }
+  }
+
+  checkBalance() {
+    return "Current Balance: ₹" + this.balance;
+  }
+}
+
+let account = new BankAccount("Sailatha", 5000);
+
+function depositMoney() {
+  let amt = Number(document.getElementById("amount").value);
+  document.getElementById("output").textContent = account.deposit(amt);
+}
+
+function withdrawMoney() {
+  let amt = Number(document.getElementById("amount").value);
+  document.getElementById("output").textContent = account.withdraw(amt);
+}
+
+function checkBal() {
+  document.getElementById("output").textContent = account.checkBalance();
+}
+</script>
+
+</body>
+</html>

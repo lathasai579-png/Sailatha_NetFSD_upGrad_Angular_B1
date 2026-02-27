@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Salary System</title>
+</head>
+<body>
+
+    <h2>Employee Salary System</h2>
+
+    <div id="output"></div>
+
+<script>
+
+class Employee {
+    constructor(name, salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    getDetails() {
+        return `
+        <h3>Employee Details</h3>
+        Name: ${this.name} <br>
+        Base Salary: ${this.salary} <br>
+        `;
+    }
+}
+
+class Manager extends Employee {
+    constructor(name, salary, bonus) {
+        super(name, salary);
+        this.bonus = bonus;
+    }
+
+    getTotalSalary() {
+        return this.salary + this.bonus;
+    }
+
+    displayManagerDetails() {
+        return `
+        ${this.getDetails()}
+        Bonus: ${this.bonus} <br>
+        Total Salary: ${this.getTotalSalary()} <br>
+        `;
+    }
+}
+
+class Director extends Manager {
+    constructor(name, salary, bonus, stockOptions) {
+        super(name, salary, bonus);
+        this.stockOptions = stockOptions;
+    }
+
+    getFullCompensation() {
+        return this.getTotalSalary() + this.stockOptions;
+    }
+
+    displayDirectorDetails() {
+        return `
+        ${this.displayManagerDetails()}
+        Stock Options: ${this.stockOptions} <br>
+        Full Compensation: ${this.getFullCompensation()}
+        `;
+    }
+}
+
+let director = new Director("Sailatha", 80000, 20000, 50000);
+
+document.getElementById("output").innerHTML = director.displayDirectorDetails();
+
+</script>
+
+</body>
+</html>

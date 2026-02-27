@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Inheritance</title>
+</head>
+<body>
+
+<h2>Vehicle Inheritance Output</h2>
+<p id="output"></p>
+
+<script>
+    
+    class Vehicle {
+        constructor(brand, speed) {
+            this.brand = brand;
+            this.speed = speed;
+        }
+
+        start() {
+            return this.brand + " vehicle started at speed " + this.speed + " km/h";
+        }
+    }
+
+    
+    class Car extends Vehicle {
+        constructor(brand, speed, fuelType) {
+            super(brand, speed);   // calling parent constructor
+            this.fuelType = fuelType;
+        }
+
+        showDetails() {
+            return "Brand: " + this.brand + 
+                   ", Speed: " + this.speed + 
+                   " km/h, Fuel Type: " + this.fuelType;
+        }
+    }
+
+    
+    let myCar = new Car("Hyundai", 120, "Petrol");
+
+    
+    let startMsg = myCar.start();
+    let details = myCar.showDetails();
+
+    document.getElementById("output").innerHTML = startMsg + "<br>" + details;
+</script>
+
+</body>
+</html>

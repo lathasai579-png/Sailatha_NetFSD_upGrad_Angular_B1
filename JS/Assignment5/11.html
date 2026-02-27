@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getter & Setter Example</title>
+</head>
+<body>
+
+<h2>User Password Validation</h2>
+<p id="output"></p>
+
+<script>
+class User {
+
+  constructor() {
+    this._password = "";
+  }
+
+  // Setter
+  set password(pass) {
+    if (pass.length >= 6) {
+      this._password = pass;
+    } else {
+      alert("Password must be at least 6 characters");
+    }
+  }
+
+  
+  get password() {
+    return this._password;
+  }
+
+}
+
+let u1 = new User();
+u1.password = "abc123";
+
+document.getElementById("output").textContent =
+"Password is: " + u1.password;
+
+</script>
+
+</body>
+</html>

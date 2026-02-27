@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Static Methods Example</title>
+</head>
+<body>
+
+<h2>MathUtils Static Methods</h2>
+<p id="result"></p>
+
+<script>
+class MathUtils {
+
+  static add(a, b) {
+    return a + b;
+  }
+
+  static subtract(a, b) {
+    return a - b;
+  }
+
+  static multiply(a, b) {
+    return a * b;
+  }
+
+}
+
+
+let addResult = MathUtils.add(10, 20);
+let subResult = MathUtils.subtract(30, 10);
+let mulResult = MathUtils.multiply(5, 4);
+
+document.getElementById("result").textContent =
+"Add: " + addResult +
+", Subtract: " + subResult +
+", Multiply: " + mulResult;
+
+</script>
+
+</body>
+</html>

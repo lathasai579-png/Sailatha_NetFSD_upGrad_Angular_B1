@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Method Overriding</title>
+</head>
+<body>
+<h2>Animal Sound System</h2>
+<button onclick="playSounds()">Make Sounds</button>
+
+<div id="output"></div>
+
+<script>
+class Animal {
+  makeSound() {
+    return "Animal makes a sound";
+  }
+}
+
+class Dog extends Animal {
+  makeSound() {
+    return "Dog barks ";
+  }
+}
+
+class Cat extends Animal {
+  makeSound() {
+    return "Cat meows ";
+  }
+}
+
+class Cow extends Animal {
+  makeSound() {
+    return "Cow moos ";
+  }
+}
+
+function playSounds() {
+  let animals = [new Dog(), new Cat(), new Cow()];
+  let result = "";
+
+  animals.forEach(a => {
+    result += a.makeSound() + "<br>";
+  });
+
+  document.getElementById("output").innerHTML = result;
+}
+</script>
+
+</body>
+</html>

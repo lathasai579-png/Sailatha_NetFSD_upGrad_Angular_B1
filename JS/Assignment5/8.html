@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment System</title>
+</head>
+<body>
+
+<h2>Payment System</h2>
+
+<input type="number" id="amount" placeholder="Enter Amount">
+<br><br>
+
+<select id="paymentMethod">
+    <option value="credit">Credit Card</option>
+    <option value="upi">UPI</option>
+    <option value="cash">Cash</option>
+</select>
+<br><br>
+
+<button onclick="makePayment()">Pay Now</button>
+
+<h3 id="result"></h3>
+
+<script>
+
+class Payment {
+    pay(amount) {
+        return "Processing payment of Rs." + amount;
+    }
+}
+
+
+class CreditCardPayment extends Payment {
+    pay(amount) {
+        return "Paid Rs." + amount + " using Credit Card ";
+    }
+}
+
+class UPIPayment extends Payment {
+    pay(amount) {
+        return "Paid Rs." + amount + " using UPI ";
+    }
+}
+
+
+class CashPayment extends Payment {
+    pay(amount) {
+        return "Paid Rs." + amount + " using Cash ";
+    }
+}
+
+
+function makePayment() {
+    let amount = document.getElementById("amount").value;
+    let method = document.getElementById("paymentMethod").value;
+    let payment;
+
+    if(method === "credit") {
+        payment = new CreditCardPayment();
+    }
+    else if(method === "upi") {
+        payment = new UPIPayment();
+    }
+    else {
+        payment = new CashPayment();
+    }
+
+    document.getElementById("result").textContent = payment.pay(amount);
+}
+</script>
+
+</body>
+</html>

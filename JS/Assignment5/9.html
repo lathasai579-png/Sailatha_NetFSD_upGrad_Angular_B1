@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Features Inside Class</title>
+</head>
+<body>
+
+<h2>Product Details</h2>
+<div id="output"></div>
+
+<script>
+class Product {
+
+  constructor({name, price, category = "General"}) {
+    this.name = name;
+    this.price = price;
+    this.category = category;
+  }
+
+  showDetails = () => {
+    return `Product: ${this.name}  Price: ₹${this.price}  Category: ${this.category}`;
+  }
+
+  
+  cloneProduct = () => {
+    let newProduct = {...this};
+    return newProduct;
+  }
+}
+
+
+let p1 = new Product({name: "Laptop", price: 60000});
+
+
+document.getElementById("output").innerHTML += p1.showDetails() + "<br>";
+
+
+let p2 = p1.cloneProduct();
+p2.name = "Mobile";
+p2.price = 20000;
+
+document.getElementById("output").innerHTML += 
+`Cloned -> Product: ${p2.name}  Price: ₹${p2.price}  Category: ${p2.category}`;
+
+</script>
+
+</body>
+</html>
