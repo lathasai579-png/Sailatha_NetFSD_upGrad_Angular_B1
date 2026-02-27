@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="displayHistory()">
+
+<h2>Location-Based Logger</h2>
+
+<button onclick="getLocation()">Get My Location</button>
+
+<div id="box">
+    <p id="lat"></p>
+    <p id="lon"></p>
+    <p id="msg"></p>
+</div>
+
+<h3>Last 5 Locations</h3>
+<div id="history"></div>
+<script>
+
+function getLocation(){
+
+    if(navigator.geolocation){
+
+        navigator.geolocation.getCurrentPosition(showPosition, showError, {timeout:10000});
+
+    }else{
+        document.getElementById("msg").innerHTML="Geolocation not supported";
+    }
+}
+function showPosition(position){
+
+    let latitude = position.coords.latitude;
+    let longitude = position.coords.longitude;
+
+    document.getElementById("lat").innerHTML = "Latitude: " + latitude;
+    document.getElementById("lon").innerHTML = "Longitude: " + longitude;
+
+    let locationObj = {
+        lat: latitude,
+        lon: longitude
+    };
+
+    let locations = JSON.parse(localStorage.getItem("locHistory")) || [];
+
+    locations.push(locationObj);
+
+    if(locations.length > 5){
+        locations.shift();
+    }
+
+    localStorage.setItem("locHistory", JSON.stringify(locations));
+
+    displayHistory();
+}
+function showError(error){
+
+    switch(error.code){
+        case error.PERMISSION_DENIED:
+            document.getElementById("msg").innerHTML="Permission Denied";
+            break;
+        case error.POSITION_UNAVAILABLE:
+            document.getElementById("msg").innerHTML="Location Unavailable";
+            break;
+        case error.TIMEOUT:
+            document.getElementById("msg").innerHTML="Request Timeout";
+            break;
+        default:
+            document.getElementById("msg").innerHTML="Unknown Error";
+    }
+}
+function displayHistory(){
+
+    let locations = JSON.parse(localStorage.getItem("locHistory")) || "";
+
+    let output="";
+
+    for(let i=0;i<locations.length;i++){
+        output += "<p>Lat: "+locations[i].lat+
+        " | Lon: "+locations[i].lon+"</p>";
+    }
+
+    document.getElementById("history").innerHTML=output;
+}
+
+</script>
+</body>
+</html>
