@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Payroll System</title>
+</head>
+<body>
+
+<h2>Employee Payroll Analytics</h2>
+
+<button onclick="runPayroll()">Run Analytics</button>
+
+<h3>Employee Table</h3>
+<div id="table"></div>
+
+<h3>Results</h3>
+<p id="total"></p>
+<p id="highest"></p>
+<p id="lowest"></p>
+<p id="aboveAvg"></p>
+
+<script>
+
+let employees = [
+ { id:1, name:"Ravi", dept:"IT", salary:70000 },
+ { id:2, name:"Anita", dept:"HR", salary:50000 },
+ { id:3, name:"Karan", dept:"IT", salary:80000 },
+ { id:4, name:"Meena", dept:"Finance", salary:60000 }
+];
+
+function runPayroll(){
+
+
+let totalSalary = employees.reduce((sum,e)=>sum+e.salary,0);
+document.getElementById("total").textContent = "Total Salary Expense: "+totalSalary;
+
+
+let highest = employees.reduce((a,b)=> a.salary>b.salary?a:b);
+let lowest = employees.reduce((a,b)=> a.salary<b.salary?a:b);
+
+document.getElementById("highest").textContent =
+"Highest Paid: "+highest.name+" - "+highest.salary;
+
+document.getElementById("lowest").textContent =
+"Lowest Paid: "+lowest.name+" - "+lowest.salary;
+
+
+let updatedEmployees = employees.map(e=>{
+ if(e.dept==="IT"){
+   return {...e, salary: e.salary*1.15}
+ }
+ return e;
+});
+
+
+
+let afterTax = updatedEmployees.map(e=>{
+ return {...e, salary: e.salary*0.9}
+});
+
+
+let grouped = afterTax.reduce((acc,e)=>{
+ if(!acc[e.dept]) acc[e.dept]=[];
+ acc[e.dept].push(e);
+ return acc;
+},{});
+
+
+
+for(let dept in grouped){
+ let avg = grouped[dept]
+           .reduce((sum,e)=>sum+e.salary,0)
+           /grouped[dept].length;
+ console.log(dept+" Avg Salary: "+avg);
+}
+
+
+
+let sorted = afterTax.sort((a,b)=>b.salary-a.salary);
+
+
+let avgSalary = afterTax.reduce((s,e)=>s+e.salary,0)
+/afterTax.length;
+
+let aboveAvg = afterTax.filter(e=>e.salary>avgSalary);
+
+document.getElementById("aboveAvg").textContent =
+"Above Avg Salary Employees: "+
+aboveAvg.map(e=>e.name).join(", ");
+
+
+
+let table = "<table border=1><tr><th>ID</th><th>Name</th><th>Dept</th><th>Salary</th></tr>";
+
+sorted.forEach(e=>{
+ table += `<tr>
+ <td>${e.id}</td>
+ <td>${e.name}</td>
+ <td>${e.dept}</td>
+ <td>${e.salary.toFixed(0)}</td>
+ </tr>`
+});
+
+table+="</table>";
+
+document.getElementById("table").innerHTML=table;
+
+}
+
+</script>
+
+</body>
+</html>

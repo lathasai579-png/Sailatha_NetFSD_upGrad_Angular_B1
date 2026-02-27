@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Analyzer</title>
+</head>
+<body>
+
+<h2>Student Performance Analyzer</h2>
+<button onclick="analyzeStudents()">Analyze</button>
+
+<p id="passed"></p>
+<p id="distinction"></p>
+<p id="average"></p>
+<p id="topper"></p>
+<p id="failed"></p>
+<p id="grades"></p>
+
+<script>
+let students = [
+  { name: "Akhil", marks: 85 },
+  { name: "Priya", marks: 72 },
+  { name: "Ravi", marks: 90 },
+  { name: "Meena", marks: 45 },
+  { name: "Karan", marks: 30 }
+];
+
+function analyzeStudents(){
+
+
+let passed = students.filter(s => s.marks >= 40)
+                     .map(s => s.name);
+document.getElementById("passed").textContent =
+"Passed Students: " + passed.join(", ");
+
+
+let distinction = students.filter(s => s.marks >= 85)
+                          .map(s => s.name);
+document.getElementById("distinction").textContent =
+"Distinction Students: " + distinction.join(", ");
+
+let total = students.reduce((sum,s) => sum + s.marks,0);
+let avg = total / students.length;
+document.getElementById("average").textContent =
+"Class Average: " + avg;
+
+
+let topper = students.reduce((max,s) => 
+              s.marks > max.marks ? s : max);
+document.getElementById("topper").textContent =
+"Topper: " + topper.name;
+
+let failed = students.filter(s => s.marks < 40).length;
+document.getElementById("failed").textContent =
+"Failed Students Count: " + failed;
+
+
+let grades = students.map(s => {
+    let grade;
+    if(s.marks >= 85) grade = "A";
+    else if(s.marks >= 60) grade = "B";
+    else if(s.marks >= 40) grade = "C";
+    else grade = "Fail";
+    return s.name + " : " + grade;
+});
+
+document.getElementById("grades").textContent =
+"Grades: " + grades.join(", ");
+
+}
+</script>
+
+</body>
+</html>

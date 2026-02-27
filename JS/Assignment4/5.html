@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Cleaning & Analytics</title>
+</head>
+<body>
+
+<h2>Data Cleaning & Analytics Output</h2>
+<pre id="output"></pre>
+
+<script>
+
+let numbers = [10, 20, 30, 10, 40, 20, 50, 60, 60];
+
+
+
+let unique = [...new Set(numbers)];
+
+
+
+let sorted = [...new Set(numbers)].sort((a,b)=>b-a);
+let secondLargest = sorted[1];
+
+
+
+let frequency = numbers.reduce((acc,val)=>{
+    acc[val] = (acc[val] || 0) + 1;
+    return acc;
+}, {});
+
+
+
+let firstNonRepeat = numbers.find(num => frequency[num] === 1);
+
+
+
+let rotate = (arr,k)=>{
+    return arr.slice(k).concat(arr.slice(0,k));
+}
+let rotatedArray = rotate(numbers,2);
+
+
+
+let nested = [1,2,[3,4,[5]]];
+
+function flatten(arr){
+    return arr.reduce((acc,val)=>
+        Array.isArray(val) ? acc.concat(flatten(val)) : acc.concat(val)
+    ,[]);
+}
+
+let flatArray = flatten(nested);
+
+
+
+let missArr = [1,2,3,5,6];
+let missing = missArr.find((num,i)=> num !== i+1);
+
+
+
+document.getElementById("output").textContent = `
+1. Unique Values: ${unique}
+2. Second Largest: ${secondLargest}
+3. Frequency: ${JSON.stringify(frequency)}
+4. First Non-Repeating: ${firstNonRepeat}
+5. Rotated Array: ${rotatedArray}
+6. Flattened Array: ${flatArray}
+7. Missing Number: ${missing}
+`;
+
+</script>
+
+</body>
+</html>

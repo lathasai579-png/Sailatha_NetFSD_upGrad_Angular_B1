@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+</head>
+<body>
+
+<script>
+
+
+let cart = [
+  { id: 1, product: "Laptop", price: 60000, qty: 1 },
+  { id: 2, product: "Headphones", price: 2000, qty: 2 },
+  { id: 3, product: "Mouse", price: 800, qty: 1 }
+];
+
+
+let totalValue = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+console.log("Total Cart Value:", totalValue);
+
+
+cart = cart.map(item =>
+  item.id === 2 ? { ...item, qty: item.qty + 1 } : item
+);
+
+
+cart = cart.filter(item => item.id !== 3);
+
+
+cart = cart.map(item =>
+  item.price > 10000 ? { ...item, price: item.price * 0.9 } : item
+);
+
+
+cart.sort((a, b) => (a.price * a.qty) - (b.price * b.qty));
+
+
+let anyCostly = cart.some(item => item.price > 50000);
+console.log("Any item above 50K:", anyCostly);
+
+
+let allInStock = cart.every(item => item.qty > 0);
+console.log("All items in stock:", allInStock);
+
+
+let invoice = cart.map(item => ({
+  product: item.product,
+  totalPrice: item.price * item.qty
+}));
+console.log("Invoice:", invoice);
+
+
+let mostExpensive = cart.reduce((max, item) =>
+  item.price > max.price ? item : max
+);
+console.log("Most Expensive Product:", mostExpensive);
+
+
+let gst = totalValue * 0.18;
+console.log("GST:", gst);
+console.log("Total with GST:", totalValue + gst);
+
+</script>
+
+</body>
+</html>

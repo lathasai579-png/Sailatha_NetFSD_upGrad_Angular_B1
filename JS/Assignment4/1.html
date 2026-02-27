@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Book Store</title>
+</head>
+<body>
+
+<h2>Online Book Store Inventory</h2>
+<p id="output"></p>
+
+<script>
+
+let books = [
+  { id: 1, title: "JavaScript Basics", price: 450, stock: 10 },
+  { id: 2, title: "React Guide", price: 650, stock: 5 },
+  { id: 3, title: "Node.js Mastery", price: 550, stock: 8 },
+  { id: 4, title: "CSS Complete", price: 300, stock: 12 }
+];
+
+let titles = books.map(book => book.title);
+let totalValue = books.reduce((sum, book) => sum + (book.price * book.stock), 0);
+let costlyBooks = books.filter(book => book.price > 500);
+
+let increasedPrice = books.map(book => ({
+    ...book,
+    price: book.price * 1.05
+}));
+
+
+ sortedBooks = [...books].sort((a,b) => a.price - b.price);
+
+// Remove a book by ID
+let removeId = 2;
+let updatedBooks = books.filter(book => book.id !== removeId);
+
+// 7. Check if any book is out of stock
+let outOfStock = books.some(book => book.stock === 0);
+
+// Group by price range
+let groupedBooks = books.reduce((acc, book) => {
+    if(book.price < 400){
+        acc.low.push(book);
+    }
+    else if(book.price <= 600){
+        acc.medium.push(book);
+    }
+    else{
+        acc.high.push(book);
+    }
+    return acc;
+}, {low:[], medium:[], high:[]});
+
+
+// Discount for books above ₹600
+let discountBooks = books.map(book => {
+    if(book.price > 600){
+        return {...book, price: book.price * 0.9};
+    }
+    return book;
+});
+
+
+// Invoice string
+let invoice = books.map(book => book.title + " - ₹" + book.price).join("\n");
+
+
+
+document.getElementById("output").innerText = 
+"Titles: " + titles + "\n\n" +
+"Total Inventory Value: ₹" + totalValue + "\n\n" +
+"Books > ₹500: " + JSON.stringify(costlyBooks) + "\n\n" +
+"Sorted Books: " + JSON.stringify(sortedBooks) + "\n\n" +
+"Removed Book ID 2: " + JSON.stringify(updatedBooks) + "\n\n" +
+"Any Out of Stock? " + outOfStock + "\n\n" +
+"Grouped Books: " + JSON.stringify(groupedBooks) + "\n\n" +
+"Discount Books: " + JSON.stringify(discountBooks) + "\n\n" +
+"Invoice:\n" + invoice;
+
+</script>
+
+</body>
+</html>
